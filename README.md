@@ -17,10 +17,24 @@
 
 **Software/Tools Used:** 
 - ST Visual Develop (STVD)
+
+  link: https://www.st.com/en/development-tools/stvd-stm8.html
+
 - ST Visual Programmer (STVP)
+
+link: https://www.st.com/en/development-tools/stvp-stm8.html 
+
 - Cosmic C Compiler
+
+  link: https://www.cosmicsoftware.com/download_stm8_free.php
+
 - Standard Peripheral Library (from GitHub)
+
+   link: https://github.com/CircuitDigest/STM8S103F3_SPL
+
 - Bluetooth Serial Monitor App (from Google Play Store)
+
+  link: https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal
 
 ## Explaination of Hardware Components: 
 - **STM8 Microcontroller:** The STM8S003F3P6 is a cost-effective 8-bit microcontroller based on the STM8 core architecture, designed by STMicroelectronics. It is part of the STM8 family, renowned for its versatility and efficiency in a wide range of applications.
