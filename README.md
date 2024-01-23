@@ -335,7 +335,7 @@ C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8
 ![App Screenshot](./assets/steps_2/s_eighth.jpg)  
 
 ## Complete installation process:
-- You can refer this YouTube Video :
+- You can refer this YouTube Video for detailed process :
 
   https://www.youtube.com/watch?v=ho5wF6C_mYs&ab_channel=BadMek
 
