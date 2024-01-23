@@ -30,7 +30,7 @@
 
 - Standard Peripheral Library (from GitHub)
 
-   link: https://github.com/CircuitDigest/STM8S103F3_SPL
+  link: https://github.com/CircuitDigest/STM8S103F3_SPL
 
 - Bluetooth Serial Monitor App (from Google Play Store)
 
@@ -43,6 +43,7 @@
      - STM8 Core: The microcontroller is powered by the STM8 core, offering a balance of performance and power efficiency for embedded applications.
      - Peripheral Integration: With various integrated peripherals, including GPIO, timers, UART, and more, the STM8S003F3P6 provides a comprehensive set of features for diverse applications.
      - Flash Memory: Featuring Flash memory for program storage, this microcontroller supports efficient and flexible code execution.
+
   - **Applications:**
     - Embedded Systems
     - IoT (Internet of Things) Devices
