@@ -23,24 +23,67 @@
 - Bluetooth Serial Monitor App (from Google Play Store)
 
 ## Explaination of Hardware Components: 
-- Arduino UNO:
-    - The Arduino Uno is based on the ATmega328P microcontroller and is a popular choice for beginners and experienced makers alike. It features a simple and easy-to-use design, making it suitable for a wide range of projects, from             simple LED blinking exercises to more complex applications like robotics and sensor interfacing.
-  - Key Features:
-    - ATmega328P Microcontroller: The heart of the Arduino Uno, responsible for executing the program and controlling connected devices.
-    - Digital and Analog I/O Pins: Provides a variety of pins for interfacing with sensors, actuators, and other electronic components.
-    - USB Interface: Allows easy programming and communication with a computer.
-    - Open-Source Platform: Arduino Uno is based on an open-source platform, enabling a large community of developers and enthusiasts to contribute to its growth and share knowledge.
-    ![App Screenshot](./assets/output/arduino_uno.jpg)
-- TFT Display:
-  - The 2.4 Inch Touch Screen TFT Display Shield is a compact and user-friendly display module designed to seamlessly integrate with the Arduino Uno. Equipped with a touch-sensitive screen, this shield enhances the user interface possibilities for Arduino projects.
+- **STM8 Microcontroller:** The STM8S003F3P6 is a cost-effective 8-bit microcontroller based on the STM8 core architecture, designed by STMicroelectronics. It is part of the STM8 family, renowned for its versatility and efficiency in a wide range of applications.
 
-   - Key Features:
-        - 2.4-Inch TFT LCD Display: Offers vibrant and clear visual output for text and graphics.
-        - Touch Screen Interface: Allows user interaction through touch, opening up possibilities for interactive applications.
-        - Arduino Uno Compatibility: Designed specifically for use with the Arduino Uno microcontroller board.
-        - Easy to Use: The shield format simplifies the connection and integration process, making it accessible for both beginners and experienced developers.
+  - **Key Features:**
+     - STM8 Core: The microcontroller is powered by the STM8 core, offering a balance of performance and power efficiency for embedded applications.
+     - Peripheral Integration: With various integrated peripherals, including GPIO, timers, UART, and more, the STM8S003F3P6 provides a comprehensive set of features for diverse applications.
+     - Flash Memory: Featuring Flash memory for program storage, this microcontroller supports efficient and flexible code execution.
+  - **Applications:**
+    - Embedded Systems
+    - IoT (Internet of Things) Devices
+    - Consumer Electronics
+    - Industrial Control Systems
+    
+    ![App Screenshot](./assets/output/arduino_uno.jpg)
+
+- **ST-Link V2 Board (STM8S103F3P6 Programmer) :** The ST-Link V2 Board is a compact and cost-effective programming and debugging tool developed by STMicroelectronics. It is commonly used for programming STM8 and STM32 microcontrollers and is particularly suitable for the STM8S103F3P6.
+
+  - **Key Features**:
+     - **Programming and Debugging:** The ST-Link V2 Board serves as both a programmer and debugger, allowing users to program their STM8S103F3P6 microcontroller and debug their applications.
+     - **SWIM and SWD Support:** The board supports both SWIM (Single Wire Interface Module) for STM8 and SWD (Serial Wire Debug) for STM32, providing flexibility for different microcontroller families.
+     - **USB Interface:** It connects to the host computer via USB, ensuring convenient and reliable communication for programming and debugging tasks.
+     - **Versatile Use:** In addition to its compatibility with the STM8S103F3P6, the ST-Link V2 Board is widely used for various STM32 microcontrollers, making it a versatile tool for STM32 development.
+
+  - **Usage:**
+     - **Connectivity:** Connect the ST-Link V2 Board to the target STM8S103F3P6 microcontroller using the appropriate SWIM interface.
+     - **Debugging:** Leverage the board's debugging capabilities with an integrated debugger in your chosen IDE (Integrated Development Environment).
   
     ![App Screenshot](./assets/output/tftdisplay1.jpg)
+
+
+- **HC-08 Bluetooth Module :** The HC-05 is a widely used Bluetooth module that facilitates wireless communication between electronic devices. This module is versatile and popular in various applications, including IoT (Internet of Things) projects, robotics, and embedded systems.
+
+   - **Key Features**:
+      - **Bluetooth Connectivity:** The HC-05 module supports Bluetooth communication, allowing devices to establish wireless connections over short distances.
+  
+      - **Serial Communication:** It provides a simple and easy-to-use serial communication interface, making it compatible with a wide range of microcontrollers and embedded systems.
+
+      - **Configurable Modes:** The HC-05 module can operate in both Master and Slave modes, offering flexibility for different communication scenarios.
+
+      - **Ease of Integration:** With its compact form factor and straightforward interface, the HC-05 is relatively easy to integrate into various electronic projects.
+
+   - **Pin Configuration:** The HC-05 Bluetooth Module typically has the following pin configuration:
+
+      - **VCC:** Power supply voltage (3.3V or 5V).
+  
+      - **GND:** Ground.
+  
+      - **TXD:** Transmit Data (connects to the RX pin of the microcontroller).
+  
+      - **RXD:** Receive Data (connects to the TX pin of the microcontroller).
+  
+      - **STATE:** Indicates the current state of the module (optional).
+
+  - **Usage:**
+
+     - **Power Supply:** Connect the VCC and GND pins to the appropriate power sources.
+  
+     - **Serial Communication:** Connect the TXD and RXD pins to the microcontroller's RX and TX pins, respectively.
+
+     - **Mode Configuration:** Set the mode (Master or Slave) based on your application requirements.
+
+      - **Pairing:** Pair the HC-05 module with the target Bluetooth device using the appropriate pairing process.
 
     ![App Screenshot](./assets/output/tftdisplay2.jpg)
 
@@ -177,33 +220,89 @@
   ![App Screenshot](./assets/output/boxpixel.jpg)
   
   
-## Steps in  :
+## a) Steps in STVD :
 
-1. Open the Arduino IDE Software.
+1. Open the Software
 
+ ![App Screenshot](./assets/steps/first.jpg)
 
-2. Click on File > New Sketch
+2. Click on File and Create a New Workspace
 
-  ![App Screenshot](./assets/steps/first.png)
+  ![App Screenshot](./assets/steps/second.jpg)
 
-3. New window of code editor opens
+3. Click on Create Workspace
    
-  ![App Screenshot](./assets/steps/second.png)
+  ![App Screenshot](./assets/steps/third.jpg)
 
-4. Write the required code in the Code Editor
-
-5. Select the Board according to the specification (Arduino UNO here) COM Port varies from PC to PC.
+4. Give the workspace file name and the set the workspace Location
  
-  ![App Screenshot](./assets/steps/third.png)
+ ![App Screenshot](./assets/steps/fourth.jpg)
 
-6. To verify this, head towards Device Manager in PC -> USB Controllers. Check the port number.
+5. Give the Project Name and Select the Tool Chain as STM8 Cosmic
+  ![App Screenshot](./assets/steps/fifth.jpg)
+
+Set the toolchain root as :-
+C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8
+
+6. Select the Appropriate MCU
      
-  ![App Screenshot](./assets/steps/fourth.png)
+  ![App Screenshot](./assets/steps/sixth.jpg)
 
-7. After writing the code click on 'Tick mark' to compile the code.
+7. Right click on Source Files and add Source Files (.c)
     
-  ![App Screenshot](./assets/steps/fifth.png)
+  ![App Screenshot](./assets/steps/seventh.jpg)
 
-8. This is the final step and click on the right arrow mark to dump the code on the device.
+  ![App Screenshot](./assets/steps/eighth.jpg)
+
+8. Right click on Include Files and add Include Files (.h)
    
-  ![App Screenshot](./assets/steps/sixth.png)
+  ![App Screenshot](./assets/steps/seventh.jpg)
+
+  ![App Screenshot](./assets/steps/tenth.jpg)
+
+9.	Write the code in main.c file
+
+10. Compile and Build the program
+
+ ![App Screenshot](./assets/steps/11.jpg)
+
+11. If you have followed the steps properly, this will appear:
+  ![App Screenshot](./assets/steps/12.jpg)
+
+## b) Steps in STVP :
+1. Open ST Visual Programmer
+
+ ![App Screenshot](./assets/steps_2/s_first.jpg)
+ 
+2. Click on File > Open
+
+ ![App Screenshot](./assets/steps_2/s_second.jpg)
+
+3. Select .s19 file > Open
+
+ ![App Screenshot](./assets/steps_2/s_third.jpg) 
+
+4. Click on Configure
+
+![App Screenshot](./assets/steps_2/s_fourth.jpg) 
+
+5. Select these Specifications
+
+![App Screenshot](./assets/steps_2/s_fifth.jpg)    
+
+6. Click on Program > Current Tab OR CTRL+P
+
+![App Screenshot](./assets/steps_2/s_sixth.jpg)    
+
+7. Repeat the Configuration procedure or Reconnect the ST LINK V2 (Debugger)
+
+![App Screenshot](./assets/steps_2/s_seventh.jpg)    
+
+![App Screenshot](./assets/steps_2/s_eighth.jpg)  
+
+## Complete installation process:
+- You can refer this YouTube Video :
+
+  https://www.youtube.com/watch?v=ho5wF6C_mYs&ab_channel=BadMek
+
+
