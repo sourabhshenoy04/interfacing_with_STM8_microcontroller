@@ -102,7 +102,7 @@
 
       - **Pairing:** Pair the HC-05 module with the target Bluetooth device using the appropriate pairing process.
 
-    ![App Screenshot](./assets/gallery/hc-05_bt_mod.jpg)
+    ![App Screenshot](./assets/gallery/hc-05_bt_mod.png)
 
 
 ## Working of code:
