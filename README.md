@@ -49,8 +49,8 @@
     - IoT (Internet of Things) Devices
     - Consumer Electronics
     - Industrial Control Systems
-    
-    ![App Screenshot](./assets/output/arduino_uno.jpg)
+
+
 
 - **ST-Link V2 Board (STM8S103F3P6 Programmer) :** The ST-Link V2 Board is a compact and cost-effective programming and debugging tool developed by STMicroelectronics. It is commonly used for programming STM8 and STM32 microcontrollers and is particularly suitable for the STM8S103F3P6.
 
@@ -121,7 +121,9 @@
 
 - ***Output:***
 
-  ![App Screenshot](./assets/output/helloworld.jpg)
+https://github.com/sourabhshenoy04/interfacing_with_STM8_microcontroller/assets/105969078/eb154892-de4a-44c0-adaa-9dd89923fc64
+
+
   
 2. **On-Board LED with Push Button**
 - #define LED GPIOB,GPIO_PIN_5 //onboard LED: This line creates a macro named "LED" representing Port B and pin 5, which is typically connected to an onboard LED.
@@ -142,7 +144,11 @@
 
 - ***Output:***
 
-  ![App Screenshot](./assets/output/colorfulhelloworld.png)
+
+
+https://github.com/sourabhshenoy04/interfacing_with_STM8_microcontroller/assets/105969078/538bf0c9-f3ae-479f-b146-c9a4d109b6ce
+
+
   
 3. **Interfacing HC-05 with STM8 and controlling LED by passing 1/0 to turn LED ON/OFF:**
 - #include "stm8s.h": This line includes the necessary header file for STM8S microcontroller programming.
@@ -165,7 +171,11 @@
 
 - ***Output:***
 
-  ![App Screenshot](./assets/output/colorfulstrips.jpg)
+  
+
+https://github.com/sourabhshenoy04/interfacing_with_STM8_microcontroller/assets/105969078/4fc7347b-8491-44cc-ad64-5a3a4e0cf520
+
+
   
 4. **Interfacing HC-05 with STM8 and sending “NMAMIT” to the Serial Monitor every 1 second**
 - #include "stm8s.h": Includes the necessary header file for STM8S microcontroller programming.
@@ -199,7 +209,11 @@
 - void sendTextToBluetooth(const char *text) { ... }: Function definition to send text through UART. It iterates through each character in the input text, waits until the UART is ready to transmit, sends the character, and waits for the transmission to complete.
 - ***Output:***
 
-  ![App Screenshot](./assets/output/smallheartpixel.jpg)
+
+https://github.com/sourabhshenoy04/interfacing_with_STM8_microcontroller/assets/105969078/d5de7733-4d8e-4b82-a797-47c6fc8d53c4
+
+
+
   
 5. **Interfacing LED with STM8 and changing its Brightness using PWM:** 
 - #include "STM8S.h": This line includes the necessary header file for STM8S microcontroller programming.
@@ -232,8 +246,11 @@
 
 - ***Output:***
 
-  ![App Screenshot](./assets/output/boxpixel.jpg)
-  
+
+https://github.com/sourabhshenoy04/interfacing_with_STM8_microcontroller/assets/105969078/2cae1512-2f8d-457e-a452-f40e090a8af1
+
+
+
   
 ## a) Steps in STVD :
 
