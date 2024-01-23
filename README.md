@@ -49,7 +49,8 @@
     - IoT (Internet of Things) Devices
     - Consumer Electronics
     - Industrial Control Systems
-
+  
+     ![App Screenshot](./assets/gallery/stm8.jpg)
 
 
 - **ST-Link V2 Board (STM8S103F3P6 Programmer) :** The ST-Link V2 Board is a compact and cost-effective programming and debugging tool developed by STMicroelectronics. It is commonly used for programming STM8 and STM32 microcontrollers and is particularly suitable for the STM8S103F3P6.
@@ -64,9 +65,10 @@
      - **Connectivity:** Connect the ST-Link V2 Board to the target STM8S103F3P6 microcontroller using the appropriate SWIM interface.
      - **Debugging:** Leverage the board's debugging capabilities with an integrated debugger in your chosen IDE (Integrated Development Environment).
   
-    ![App Screenshot](./assets/output/tftdisplay1.jpg)
+    ![App Screenshot](./assets/gallery/debugger.jpg)
 
-
+ - **Connection:**
+       ![App Screenshot](./assets/gallery/connection.jpg)
 - **HC-08 Bluetooth Module :** The HC-05 is a widely used Bluetooth module that facilitates wireless communication between electronic devices. This module is versatile and popular in various applications, including IoT (Internet of Things) projects, robotics, and embedded systems.
 
    - **Key Features**:
@@ -100,7 +102,7 @@
 
       - **Pairing:** Pair the HC-05 module with the target Bluetooth device using the appropriate pairing process.
 
-    ![App Screenshot](./assets/output/tftdisplay2.jpg)
+    ![App Screenshot](./assets/gallery/hc-05_bt_mod.jpg)
 
 
 ## Working of code:
