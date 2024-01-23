@@ -1,24 +1,26 @@
 # Interfacing with STM8 Microcontroller
 
 ## Objectives:
-Basic Interfacing of TFT LCD with Arduino UNO: 
+ 
 1. On-Board LED Blinking
 2. On-Board LED with Push Button
-3. HC-05 with STM8 and controlling LED by passing 1/0 to turn LED on/off
-4. Displaying a small Heart Pixel
-5. Displaying a Random Box Pixel
-6. Displaying a Circle Shape
-7. Interfacing Pen with the screen
+3. Interfacing HC-05 with STM8 and controlling LED by passing 1/0 to turn LED ON/OFF
+4. Interfacing HC-05 with STM8 and sending “NMAMIT” to the Serial Monitor every 1 Second
+5. Interfacing LED with STM8 and changing its Brightness using PWM
+
 ## 🛠  Tech Stack
 
 **Hardware:**
-- STM8 Microcontroller
-- Arduino UNO
-- PC to Arduino connecting cable
+- STM8 Microcontroller (STM8S003F3P6)
+- ST-Link V2 Board (STM8S103F3P6 Programmer)
+- HC-05 Bluetooth Module
 
 **Software/Tools Used:** 
-- Arduino IDE
-- Install the required libraries if you haven't installed it
+- ST Visual Develop (STVD)
+- ST Visual Programmer (STVP)
+- Cosmic C Compiler
+- Standard Peripheral Library (from GitHub)
+- Bluetooth Serial Monitor App (from Google Play Store)
 
 ## Explaination of Hardware Components: 
 - Arduino UNO:
@@ -44,176 +46,138 @@ Basic Interfacing of TFT LCD with Arduino UNO:
 
 
 ## Working of code:
-1. **Displaying Hello World:** 
-- Include Libraries: 
-    - MCUFRIEND_kbv: Library for interfacing TFT displays.
-    - Adafruit_GFX: Graphics library for drawing shapes and text.
-- **Pin Definitions:**
-    - Define pins for the TFT display (CS, CD, WR, RD, RST).
-- **Initialize TFT:**
-    - Start the TFT display, specifying the controller ID (0x9341).
-    - Set the display rotation, background color (Royal red), text color (Royal gold), and text size (2).
-- **Setup:**
-    - Set up the display with specified colors, rotation, and text settings.
-- **Loop:**
-    - In a continuous loop:
-        - Clear the screen with a Royal red background.
-        - Set the cursor position to (50, 50).
-        - Print "Hello World" on the screen.
-        - Wait for 2 seconds.
+1. **On-Board LED Blinking:** 
+- #define LED GPIOB, GPIO_PIN_5: This line creates a macro named "LED" that represents GPIOB (Port B) and pin 5 on that port.
+
+- #include "STM8S.h": This line includes a header file necessary for working with the STM8S microcontroller. It likely contains definitions and configurations specific to the STM8S.
+
+- void delay(int ms): This function takes an integer argument ms (milliseconds) and creates a simple delay function using nested loops. The delay is created by iterating ms times, with an inner loop that runs 120 times.
+
+- void main(): This is the main function that serves as the entry point for the program.
+
+- GPIO_DeInit(GPIOB): This line initializes or resets the GPIO (General Purpose Input/Output) Port B for use.
+
+- GPIO_Init(LED, GPIO_MODE_OUT_PP_LOW_SLOW): This line configures the pin specified by the "LED" macro as a push-pull output with low level (LED is active low) and slow speed.
+
+- while (1) { ... }: This creates an infinite loop that toggles the state of the LED (turns it on or off) using GPIO_WriteReverse(LED) and then introduces a delay of 500 milliseconds using the delay(500) function.
+
 - ***Output:***
 
   ![App Screenshot](./assets/output/helloworld.jpg)
   
-2. **Displaying colorful Hello World:**
-- **Include Libraries:**
-   - MCUFRIEND_kbv for interfacing with the TFT display.
-   - Adafruit_GFX for graphics functions.
+2. **On-Board LED with Push Button**
+- #define LED GPIOB,GPIO_PIN_5 //onboard LED: This line creates a macro named "LED" representing Port B and pin 5, which is typically connected to an onboard LED.
 
-- **Pin Definitions:**
-   - Define pins for the TFT display (CS, CD, WR, RD, RST).
+- #include "STM8S.h": This line includes a header file needed for working with the STM8S microcontroller.
 
-- **TFT Initialization:**
-   - Initialize the TFT display with a specified controller ID.
-   - Set display rotation, background color (black), text color (white), and text size.
+- void delay (int ms): This line declares a function named delay that takes an integer argument ms (milliseconds) and creates a delay using nested loops.
 
-- **Main Loop:**
-   - Clear the screen (black).
-   - Set the text cursor position.
-   - Loop through hue values (0 to 360) in steps of 10.
-   - Convert each hue to RGB using the HSVtoRGB function.
-   - Set text color to the converted RGB color.
-   - Display "hello world" on the screen with the changing rainbow colors.
-   - Pause for 200 milliseconds.
+- GPIO_DeInit(GPIOA); and GPIO_DeInit(GPIOB);: These lines reset or initialize Port A and Port B for use.
 
-- **HSVtoRGB Function:**
-   - Converts hue, saturation, and value (HSV) to red, green, and blue (RGB) colors.
-   - Uses a switch-case statement to handle different hue ranges.
+- GPIO_Init (GPIOA, GPIO_PIN_2, GPIO_MODE_IN_PU_IT);: This line configures pin 2 on Port A as an input with a pull-up resistor and interrupt capability.
+
+- GPIO_Init (GPIOB, GPIO_PIN_5, GPIO_MODE_OUT_PP_LOW_SLOW);//onboard led: This line configures pin 5 on Port B as a push-pull output with low level (onboard LED is active low) and slow speed.
+
+- while (1) { ... }: This creates an infinite loop that checks the state of pin 2 on Port A. If the button connected to this pin is pressed (GPIO_ReadInputPin(GPIOA, GPIO_PIN_2) is true), it turns on the LED (GPIO_WriteHigh(LED)); otherwise, it turns off the LED (GPIO_WriteLow(LED)).
+
+- delay (100);: After checking the button state and updating the LED, the program introduces a delay of 100 milliseconds.
+
 - ***Output:***
 
   ![App Screenshot](./assets/output/colorfulhelloworld.png)
   
-3. **Displaying Rainbow Colorful Strips:**
-- **Libraries:** The code includes two libraries: `MCUFRIEND_kbv` for TFT display control and `Adafruit_GFX` for graphics functions.
+3. **Interfacing HC-05 with STM8 and controlling LED by passing 1/0 to turn LED ON/OFF:**
+- #include "stm8s.h": This line includes the necessary header file for STM8S microcontroller programming.
 
-- **Pin Definitions:** Pins for the TFT display (CS, CD, WR, RD, RST) are defined.
+- #define LED GPIOB,GPIO_PIN_5 //onboard LED: This line creates a macro named "LED" representing Port B and pin 5, which is likely connected to an onboard LED.
 
-- **TFT Initialization:** The TFT display is initialized with the specified controller ID (0x9341), and its rotation is set. Text color, size, and other display settings are configured.
+- void UART_Config(void);: This is a function prototype declaration for a function named UART_Config that will configure the UART (Universal Asynchronous Receiver/Transmitter).
 
-- **Setup Function:**
-   - The setup function initializes the TFT display, sets rotation, text color, and size.
-   - It then calls a function `rainbowBackground()` to fill the screen with a rainbow (VIBGYOR) background.
+- void main(void) { ... }: This is the main function, the entry point of the program.
 
-- **Loop Function:**
-   - The loop function is empty, meaning it doesn't perform any continuous actions. It just runs once after setup.
+- UART_Config();: This line calls the function UART_Config() to initialize and configure the UART.
 
-- **Rainbow Background Function (`rainbowBackground`):**
-   - This function creates a rainbow background on the TFT display.
-   - Rainbow colors (VIBGYOR) are defined in the `colors` array.
-   - The screen height is divided into 7 sections, each corresponding to a color in the rainbow.
-   - For each pixel row in the display, a horizontal line is drawn with the color corresponding to its section in the rainbow.
+- GPIO_DeInit(GPIOB);: This line resets or initializes Port B for use.
+
+- GPIO_Init (GPIOB, GPIO_PIN_5, GPIO_MODE_OUT_PP_HIGH_FAST);: This line configures pin 5 on Port B as a push-pull output with high level (onboard LED is active high) and fast speed.
+
+- The while (1) loop: This is an infinite loop that continually checks if data is received on the UART. If data is received, it reads the received data and checks if it is '0' or '1'. If '0' is received, it turns on the LED; if '1' is received, it turns off the LED.
+
+- void UART_Config(void) { ... }: This is the function definition for configuring the UART. It uses the UART1 module, initializes it with a baud rate of 9600, 8 data bits, 1 stop bit, and no parity. It also enables the UART receive interrupt and enables the UART1 module.
+
 - ***Output:***
 
   ![App Screenshot](./assets/output/colorfulstrips.jpg)
   
-4. **Displaying a small Heart Pixel:**
-- **Libraries:** The code includes the MCUFRIEND_kbv library for TFT display control.
+4. **Interfacing HC-05 with STM8 and sending “NMAMIT” to the Serial Monitor every 1 second**
+- #include "stm8s.h": Includes the necessary header file for STM8S microcontroller programming.
 
-- **Pin Definitions:** Pins for the TFT display (CS, CD, WR, RD, RST) are defined.
+- #include <string.h>: Includes the standard C library for string manipulation.
 
-- **TFT Initialization:** The TFT display is initialized with the specified controller ID (0x9341), and its rotation is set. The background color of the display is set to black.
+- #define LED GPIOB, GPIO_PIN_5 // onboard LED: Macro definition for the onboard LED on Port B, Pin 5.
 
-- **Image Data:** A 16x16 pixel image is defined in the `image_data` array with pixel values in 0xRRGGBB format.
+- Function Prototypes:
 
-- **Setup Function:**
-   - Initializes the TFT display.
-   - Sets rotation and background color.
+    - void UART_Config(void);: Function prototype for configuring UART communication.
+    - void sendTextToBluetooth(const char *text);: Function prototype for sending text through UART.
+- void delay(int ms): Definition of a simple delay function using nested loops.
+- void main(void) { ... }: The main function, the entry point of the program.
 
-- **Loop Function:**
-   - Displays the predefined image on the TFT display using `setAddrWindow` to set the display window and `pushColors` to send the image data to the display.
-   - After displaying the image for 5 seconds, the screen is cleared (filled with black) and a 2-second delay is introduced.
+- GPIO_DeInit(GPIOB);: Resets or initializes Port B for use.
+
+- GPIO_Init(GPIOB, GPIO_PIN_5, GPIO_MODE_OUT_PP_HIGH_FAST);: Configures Pin 5 on Port B as a push-pull output with high level (active high) and fast speed.
+
+- UART_Config();: Calls the function to configure UART communication.
+
+- The while (1) loop:
+
+    - Turns on the LED by setting the GPIO pin low (GPIO_WriteLow(LED)).
+    - Sends the text "NMAMIT!\r\n" to the Bluetooth terminal using sendTextToBluetooth.
+    - Introduces a delay of 1000 milliseconds.
+    - Turns off the LED by setting the GPIO pin high (GPIO_WriteHigh(LED)).
+    - Introduces another delay of 1000 milliseconds.
+- void UART_Config(void) { ... }: Function definition for configuring UART1 with a baud rate of 9600, 8 data bits, 1 stop bit, and no parity. It enables the UART1 module.
+
+- void sendTextToBluetooth(const char *text) { ... }: Function definition to send text through UART. It iterates through each character in the input text, waits until the UART is ready to transmit, sends the character, and waits for the transmission to complete.
 - ***Output:***
 
   ![App Screenshot](./assets/output/smallheartpixel.jpg)
   
-5. **Displaying a Random Box Pixel:**
-- **Libraries:** The code includes the `Adafruit_GFX` and `MCUFRIEND_kbv` libraries for graphics and TFT display control.
+5. **Interfacing LED with STM8 and changing its Brightness using PWM:** 
+- #include "STM8S.h": This line includes the necessary header file for STM8S microcontroller programming.
 
-- **Pin Definitions:** Pins for the TFT display (CS, CD, WR, RD, RST) are defined.
+- signed int pwm_duty = 0;: Declaration of a signed integer variable pwm_duty to control the PWM duty cycle.
 
-- **TFT Initialization:** The TFT display is initialized with the specified controller ID (0x9341), and its rotation is set.
+- void delay_ms(int ms): Definition of a simple delay function using nested loops, which causes a delay of ms milliseconds.
 
-- **Image Data:** The smiley face image data is stored in the `image_data` array in PROGMEM (program memory). The actual pixel values are not provided in the code snippet.
+- void main(void) { ... }: The main function, the entry point of the program.
 
-- **Setup Function:**
-   - Initializes the TFT display.
-   - Sets rotation.
+- GPIO_DeInit(GPIOD);: Resets or initializes Port D for use.
 
-- **Loop Function:**
-   - Clears the TFT screen.
-   - Calculates the offset to center the smiley face on the screen.
-   - Nested loops iterate through the smiley face image data, drawing each pixel on the TFT display using `drawPixel`.
-   - The `while (true) {}` statement is optional and can be used to stop the loop, displaying the image once.
+- TIM2_DeInit();: Resets or initializes Timer 2 for use.
+
+- GPIO_Init(GPIOD, GPIO_PIN_4, GPIO_MODE_OUT_PP_HIGH_FAST);: Configures Pin 4 on Port D as a push-pull output with high level (active high) and fast speed.
+
+- TIM2_OC1Init(TIM2_OCMODE_PWM1, TIM2_OUTPUTSTATE_ENABLE, 1000, TIM2_OCPOLARITY_HIGH);: Initializes Timer 2 Channel 1 for PWM generation. It sets the PWM mode, enables the output, sets the period to 1000, and sets the polarity to high.
+
+- TIM2_TimeBaseInit(TIM2_PRESCALER_1, 500);: Initializes the Time Base Unit of Timer 2. It sets the prescaler to 1 and the period to 500.
+
+- TIM2_Cmd(ENABLE);: Enables Timer 2.
+
+- The main loop:
+
+    - The loop starts with a for loop where pwm_duty increases from 0 to 1000 with a step size of 2. This increases the duty cycle of the PWM signal.
+    - TIM2_SetCompare1(pwm_duty);: Sets the compare value for Timer 2 Channel 1, effectively controlling the PWM duty cycle.
+    - delay_ms(10);: Introduces a delay of 10 milliseconds.
+    - After reaching a duty cycle of 1000, the loop reverses, decreasing the duty cycle until reaching 0.
+    - This creates a fading effect on the LED connected to Pin 4 of Port D.
+
 - ***Output:***
 
   ![App Screenshot](./assets/output/boxpixel.jpg)
   
-6. **Displaying a Circle Shape:** 
-- **Libraries:** The code includes the `Adafruit_GFX` and `MCUFRIEND_kbv` libraries for graphics and TFT display control.
-
-- **Pin Definitions:** Pins for the TFT display (CS, CD, WR, RD, RST) are defined.
-
-- **TFT Initialization:** The TFT display is initialized with the specified controller ID (0x9341), and its rotation is set.
-
-- **Setup Function:**
-   - Initializes the TFT display.
-   - Sets rotation.
-
-- **Loop Function:**
-   - Clears the TFT screen.
-   - Defines the center coordinates and radius of the circle.
-   - Nested loops iterate through a rectangular area that encompasses the circle.
-   - Checks if each pixel is inside the circle using the circle equation.
-   - If a pixel is inside the circle, it is drawn in white (0xFFFF).
-   - The `while (true) {}` statement is optional and can be used to stop the loop, displaying the image once.
-
-- ***Output:***
-
-  ![App Screenshot](./assets/output/circle.jpg)
-
- 7. **Interfacing Pen with the screen:**
-
-- **Libraries:**
-   - We're using special code packages called libraries to make it easier to work with the TFT display and touch screen.
-
-- **Pin Definitions for TFT Display:**
-   - We're telling the Arduino which pins are connected to different parts of the TFT display.
-
-- **Initialize the TFT Display:**
-   - We're setting up a way for the Arduino to control and communicate with the TFT display.
-
-- **Pin Definitions for Touch Screen:**
-   - We're telling the Arduino which pins are connected to the touch screen.
-
-- **Touch Screen Calibration Constants:**
-   - We're setting some values to help the Arduino understand where you're touching on the screen.
-
-- **Touch Screen Object:**
-   - We're creating a special object (like a tool) that helps the Arduino understand the touches on the screen.
-
-- **Setup Function:**
-   - This is a one-time setup when the Arduino starts. It prepares the TFT display with specific settings.
-
-- **Loop Function:**
-   - This is the main part that keeps running over and over.
-   - It checks if you touched the screen, and if you did, it draws a small line and a filled rectangle at the touched spot on the display.
-
-- ***Output:***
-
-  ![App Screenshot](./assets/output/screenwrite2.jpg) 
-
   
-## Steps in Arduino IDE :
+## Steps in  :
 
 1. Open the Arduino IDE Software.
 
