@@ -22,7 +22,7 @@
 
 - ST Visual Programmer (STVP)
 
-link: https://www.st.com/en/development-tools/stvp-stm8.html 
+  link: https://www.st.com/en/development-tools/stvp-stm8.html 
 
 - Cosmic C Compiler
 
